@@ -1,0 +1,45 @@
+# ─── Gestor_Memory v2 (Entorno de Desarrollo IA) ───
+.dev/
+.gestor-memory/
+
+# ─── Configuración de Agentes IA (reglas internas) ───
+.agent/
+.claude/
+.gemini/
+
+# ─── Documentación interna y datos sensibles ───
+Doc-CEO/
+Doc-Arismendy/
+Auditorias/
+memory-bank/
+
+# ─── Entornos y claves ───
+.env
+.env.local
+.env.*.local
+*.env
+*.key
+*.pem
+
+# ─── Dependencias ───
+node_modules/
+
+# ─── Build output ───
+dist/
+build/
+.next/
+
+# ─── Logs ───
+*.log
+npm-debug.log*
+
+# ─── Editor / OS ───
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Trunk / Linter local ───
+.trunk/

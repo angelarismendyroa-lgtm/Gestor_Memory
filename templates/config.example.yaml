@@ -1,0 +1,109 @@
+# Gestor_Memory Configuration Example
+# Copia este archivo a .env o config.yaml y ajústalo
+
+# ===========================================
+# CONFIGURACIÓN BÁSICA
+# ===========================================
+project:
+  name: mi-proyecto
+  mode: destino  # destino | filtro
+
+# ===========================================
+# CORE MEMORY (PostgreSQL)
+# ===========================================
+database:
+  type: postgres
+  host: localhost
+  port: 5432
+  user: gestor
+  password: gestor123  # ⚠️ Usa variables de entorno en producción
+  database: gestor_memory
+
+# ===========================================
+# ZUMO (Conocimiento)
+# ===========================================
+zumo:
+  enabled: true
+  sources:
+    - .dev/**/*
+    - src/**/*.ts
+    - src/**/*.tsx
+  chunkSize: 1000
+  overlap: 100
+  embedding:
+    provider: gemini  # gemini | vertex | openai
+    model: gemini-embedding-001
+    dimensions: 1536
+
+# ===========================================
+# QA PIPELINE
+# ===========================================
+qa:
+  snyk:
+    enabled: true
+    autoScan: true  # Scan después de cada.install
+  
+  testsprite:
+    enabled: false
+    apiKey: ${TESTSPRITE_API_KEY}
+  
+  postman:
+    enabled: true
+  
+  coverage:
+    target: 80  # %
+
+# ===========================================
+# OBSIDIAN (Opcional)
+# ===========================================
+obsidian:
+  enabled: false
+  vault: proyecto-knowledge
+
+# ===========================================
+# CONECTORES EXTERNOS (Modo Filtro)
+# ===========================================
+connectors:
+  oracle:
+    enabled: false
+    host: oracle.empresa.com
+    port: 1521
+    service: PROD
+    user: ${ORACLE_USER}
+    password: ${ORACLE_PASSWORD}
+  
+  mysql:
+    enabled: false
+    host: mysql.empresa.com
+    port: 3306
+    database: app_db
+    user: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+  
+  supabase:
+    enabled: false
+    project: abc123
+    url: https://abc123.supabase.co
+    anonKey: ${SUPABASE_ANON_KEY}
+    serviceKey: ${SUPABASE_SERVICE_KEY}
+
+# ===========================================
+# RETENCIÓN
+# ===========================================
+retention:
+  nodes: 90  # días
+  edges: 180  # días
+  autoCleanup: true
+
+# ===========================================
+# MCP SERVER
+# ===========================================
+mcp:
+  enabled: false
+  port: 3001
+  tools:
+    - mem-save
+    - mem-search
+    - mem-zumo
+    - mem-relate
+    - mem-retain

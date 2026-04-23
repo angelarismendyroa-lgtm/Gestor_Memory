@@ -1,0 +1,34 @@
+{
+  "name": "gestor-memory",
+  "version": "2.0.0",
+  "description": "Universal Configuration Agentic v2",
+  "main": "dist/index.js",
+  "bin": {
+    "gestor-memory": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node cli/index.ts",
+    "mcp": "ts-node mcp-server/index.ts",
+    "visualizer": "cd visualizer && npm run dev"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@supabase/supabase-js": "^2.39.0",
+    "chalk": "^4.1.2",
+    "commander": "^11.1.0",
+    "drizzle-orm": "^0.29.0",
+    "handlebars": "^4.7.8",
+    "inquirer": "^8.2.6",
+    "ora": "^5.4.1",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^8.2.10",
+    "@types/node": "^20.11.16",
+    "@types/pg": "^8.10.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

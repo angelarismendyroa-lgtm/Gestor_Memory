@@ -1,0 +1,29 @@
+# Current State
+> Última actualización: _Pendiente primera sesión_
+
+## Estado
+
+No hay sesiones registradas aún. Este archivo será actualizado por los agentes IA al finalizar cada sesión de trabajo.
+
+## Formato esperado
+
+Al finalizar una sesión, el agente debe actualizar este archivo con:
+
+```
+## Estado — [fecha]
+
+### Última acción completada
+- [Qué se hizo]
+
+### Próxima acción
+- [Qué debe hacer el siguiente agente]
+
+### Archivos modificados
+- [lista de archivos]
+
+### Decisiones tomadas
+- [decisiones y justificaciones]
+
+### ¿Hay algo roto?
+- [ ] Sí / [x] No
+```

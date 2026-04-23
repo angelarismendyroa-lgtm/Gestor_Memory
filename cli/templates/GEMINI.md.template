@@ -1,0 +1,21 @@
+# GEMINI.md
+> Antigravity / Gemini CLI: lee estos archivos antes de empezar.
+
+@AGENTS.md
+@.dev/prd.md
+@.dev/roadmap.md
+@.dev/stack-analysis.md
+@.dev/handoffs/current-state.md
+
+## MCP Servers activos
+Ver mcp_config.json en la raíz del proyecto.
+
+## Flujo de trabajo
+Sigue el protocolo de Session Start y Session End de AGENTS.md.
+
+## QA
+- Ejecuta `gestor-memory qa` al finalizar features críticas
+- Revisa .dev/qa/ para resultados de Snyk y TestSprite
+
+---
+*Generado por Gestor_Memory v2*
