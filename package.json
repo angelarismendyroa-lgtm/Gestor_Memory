@@ -4,7 +4,7 @@
   "description": "Universal Configuration Agentic v2",
   "main": "dist/index.js",
   "bin": {
-    "gestor-memory": "dist/index.js"
+    "gestor-memory": "dist/cli/index.js"
   },
   "scripts": {
     "build": "tsc",
