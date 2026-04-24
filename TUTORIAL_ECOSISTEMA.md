@@ -712,7 +712,7 @@ neurogestor analyse --source "nueva-informacion"
 neurogestor sync --to common-vault
 ```
 
-### Spirit (Investigación)
+### Spirit (Mantenieminto y Soporte del ERP)
 
 ```bash
 # Spirit investiga un tema
