@@ -26,6 +26,7 @@ import {
 import { getDB, knowledgeNodes, knowledgeEdges, embeddings } from '../core/db';
 import { semanticSearch, keywordSearch, getRelatedNodes, hybridSearch } from '../core/engine/query';
 import { setNodeExpiration } from '../core/engine/retention';
+import { getGodNodes, getSurprisingConnections, generateGraphQuestions } from '../core/engine/analysis';
 
 const server = new Server(
   {
@@ -147,6 +148,16 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           required: ['nodeId', 'days'],
         },
       },
+      {
+        name: 'mem-graph-analysis',
+        description: 'Realizar análisis arquitectónico del grafo (God nodes, sorpresas, preguntas)',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            limit: { type: 'number', description: 'Límite de resultados por sección' },
+          },
+        },
+      },
     ],
   };
 });
@@ -257,6 +268,37 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             {
               type: 'text',
               text: `Retención configurada: ${retainArgs.days} días para nodo ${retainArgs.nodeId}`,
+            },
+          ],
+        };
+      }
+
+      case 'mem-graph-analysis': {
+        const analysisArgs = args as any;
+        const limit = analysisArgs.limit || 5;
+
+        const [godNodes, surprises, questions] = await Promise.all([
+          getGodNodes(limit),
+          getSurprisingConnections(limit),
+          generateGraphQuestions(),
+        ]);
+
+        let report = `# Reporte de Análisis de Grafo\n\n`;
+        
+        report += `## 🔱 God Nodes (Centralidad)\n`;
+        report += godNodes.map((n: any) => `- **${n.degree} conexiones:** ${n.content.slice(0, 100)}... (Fuente: ${n.source})`).join('\n');
+        
+        report += `\n\n## 😲 Conexiones Sorprendentes (Cross-file)\n`;
+        report += surprises.map((s: any) => `- [${s.relationship}] ${s.source_origin} ↔ ${s.target_origin}`).join('\n');
+        
+        report += `\n\n## ❓ Preguntas Sugeridas\n`;
+        report += questions.map((q: any) => `- **${q.question}**\n  *Por qué:* ${q.why}`).join('\n');
+
+        return {
+          content: [
+            {
+              type: 'text',
+              text: report,
             },
           ],
         };
